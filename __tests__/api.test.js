@@ -106,6 +106,8 @@ describe('POST /api/inquiries', () => {
     expect(data.error).toMatch(/unitId/);
   });
 
+  // Tests the three types of "missing required field" a client could send
+  // blank name, blank email, and no email.
   test.each([
     [{ unitId: 1, name: '', email: 'x@example.com' }],
     [{ unitId: 1, name: 'X', email: '' }],

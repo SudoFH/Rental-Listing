@@ -129,6 +129,7 @@ function createApp(dbPath = ':memory:') {
         const email = String(parsed.email || '').trim();
         const message = String(parsed.message || '').trim();
 
+        // Check unitId - if it's invalid, the name/email checks below produce an appropriate error msg
         if (!UNIT_IDS.has(unitId)) {
           return sendJSON(res, 400, { error: 'unitId must refer to an existing unit' });
         }
