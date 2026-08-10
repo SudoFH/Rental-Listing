@@ -6,8 +6,8 @@ const { DatabaseSync } = require('node:sqlite');
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const MIME = { '.html': 'text/html', '.css': 'text/css', '.js': 'application/javascript' };
 
-// Three fixed rental units. Hardcoded on purpose — keeps the project small
-// and focused on the testing practices it's meant to demonstrate.
+// Three fixed rental units for now — could move to the database once
+// listings change more often than the code does.
 const UNITS = [
   {
     id: 1,
