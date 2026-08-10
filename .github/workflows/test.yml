@@ -40,7 +40,9 @@ jobs:
           node-version: '22'
       - run: npm install
       - name: Start server in the background
-        run: DB_PATH=:memory: node server.js &
+        run: node server.js &
+        env:
+          DB_PATH: ':memory:'
       - name: Give the server a moment to boot
         run: sleep 2
       - run: npm run test:api-collection
