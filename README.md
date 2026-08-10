@@ -54,8 +54,7 @@ the project simple and to have a second GET endpoint to test.
 
 ## Notes
 
-This was built and manually verified (server behavior, all UI flows, and the
-exact assertions used in the Jest/Playwright/Postman files) in an environment
-without package-registry access, so `npm install` and the test suites
-themselves haven't been run end-to-end as a single command yet — do that
-first after cloning, and everything should pass as written.
+All three test suites — Jest, Playwright, and the Postman/Newman collection —
+have been run and verified locally, and the CI workflow in
+`.github/workflows/test.yml` passes on every push. See the
+[Actions tab](../../actions) for the latest run.
