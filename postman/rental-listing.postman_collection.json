@@ -1,0 +1,136 @@
+{
+  "info": {
+    "name": "Rental Listing API",
+    "description": "API tests for the rental listing site's /api/units and /api/inquiries endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:3000" }
+  ],
+  "item": [
+    {
+      "name": "GET /api/units returns 3 units",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/units"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 200', function () {",
+              "  pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test('Response has exactly 3 units', function () {",
+              "  pm.expect(pm.response.json()).to.have.lengthOf(3);",
+              "});",
+              "",
+              "pm.test('Each unit has the expected shape', function () {",
+              "  pm.response.json().forEach((unit) => {",
+              "    pm.expect(unit).to.have.all.keys('id', 'name', 'type', 'rent', 'description');",
+              "  });",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /api/inquiries creates an inquiry",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{baseUrl}}/api/inquiries",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"unitId\": 1,\n  \"name\": \"Postman\",\n  \"email\": \"postman@example.com\",\n  \"message\": \"Created by an automated Postman test\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 201', function () {",
+              "  pm.response.to.have.status(201);",
+              "});",
+              "",
+              "pm.test('Response includes the created inquiry', function () {",
+              "  const body = pm.response.json();",
+              "  pm.expect(body.unit_id).to.eql(1);",
+              "  pm.expect(body.name).to.eql('Postman');",
+              "  pm.expect(body.email).to.eql('postman@example.com');",
+              "  pm.expect(body.id).to.be.a('number');",
+              "  pm.expect(body.created_at).to.exist;",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /api/inquiries rejects an unknown unitId",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{baseUrl}}/api/inquiries",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"unitId\": 999,\n  \"name\": \"X\",\n  \"email\": \"x@example.com\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "  pm.response.to.have.status(400);",
+              "});",
+              "",
+              "pm.test('Error message mentions unitId', function () {",
+              "  pm.expect(pm.response.json().error).to.include('unitId');",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "POST /api/inquiries rejects a malformed email",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{baseUrl}}/api/inquiries",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"unitId\": 1,\n  \"name\": \"X\",\n  \"email\": \"not-an-email\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status code is 400', function () {",
+              "  pm.response.to.have.status(400);",
+              "});",
+              "",
+              "pm.test('Error message mentions email', function () {",
+              "  pm.expect(pm.response.json().error).to.include('email');",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

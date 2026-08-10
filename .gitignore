@@ -1,0 +1,5 @@
+node_modules/
+*.db
+playwright-report/
+test-results/
+npm-debug.log

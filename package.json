@@ -1,0 +1,26 @@
+{
+  "name": "rental-listing",
+  "version": "1.0.0",
+  "description": "A tiny rental listing site (Node.js + SQLite) with Jest, Playwright, and Postman test coverage.",
+  "main": "server.js",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "jest",
+    "test:e2e": "playwright test",
+    "test:api-collection": "newman run postman/rental-listing.postman_collection.json"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.0",
+    "jest": "^29.7.0",
+    "newman": "^6.2.2"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/tests-e2e/"
+    ]
+  }
+}

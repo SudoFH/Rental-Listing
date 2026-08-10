@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faith Hewitt — Available Rentals</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main>
+    <h1>Available Rentals</h1>
+    <p class="subtitle">Three units currently available. Node.js + SQLite backend, tested with Jest, Postman, and Playwright.</p>
+
+    <section id="units-list" aria-label="Rental Listings"></section>
+
+    <section class="inquiry-section" aria-label="Booking inquiry">
+      <h2>Request more information</h2>
+      <form id="inquiry-form">
+        <label for="unit">Unit</label>
+        <select id="unit" name="unitId" required></select>
+
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" maxlength="60" required />
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" maxlength="120" required />
+
+        <label for="message">Message (optional)</label>
+        <textarea id="message" name="message" maxlength="280"></textarea>
+
+        <button type="submit">Send inquiry</button>
+        <p id="form-error" class="error" role="alert"></p>
+        <p id="form-success" class="success" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

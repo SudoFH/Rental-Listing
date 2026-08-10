@@ -1,0 +1,12 @@
+
+> rental-listing@1.0.0 test:e2e
+> playwright test
+
+
+Running 3 tests using 3 workers
+
+  ok 2 tests-e2e\rental-listing.spec.js:4:3 › Rental listing UI › lists all three available units (213ms)
+  ok 3 tests-e2e\rental-listing.spec.js:27:3 › Rental listing UI › shows a validation error when required fields are missing (278ms)
+  ok 1 tests-e2e\rental-listing.spec.js:11:3 › Rental listing UI › lets a visitor send a booking inquiry and see a confirmation (282ms)
+
+  3 passed (1.7s)
